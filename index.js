@@ -26,6 +26,8 @@ form.addEventListener('submit', (event) => {
     UI.updateBooks(booksContainer);
     form.reset();
   }
+  const books = document.querySelectorAll('.book');
+  removeBook(books);
 });
 
 // Display Date at One Minute Interval
@@ -37,13 +39,14 @@ UI.updateBooks(document.querySelector('.added-books-container'));
 displayPage()
 
 // Removes Books from the UI and Local Storage
-const books = document.querySelectorAll('.book');
-books.forEach(book => {
-  book.addEventListener('click', (e) => {
-    if (e.target.classList.contains('remove-button')) {
-      Store.removeBook(book.id)
-      UI.removeBook(book.id)
-    }
+const removeBook = (books) => {
+  books.forEach(book => {
+    book.addEventListener('click', (e) => {
+      if (e.target.classList.contains('remove-button')) {
+        Store.removeBook(book.id)
+        UI.removeBook(book.id)
+      }
+    })
   })
-})
-
+}
+removeBook(document.querySelectorAll('.book'));
