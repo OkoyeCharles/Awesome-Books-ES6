@@ -1,5 +1,5 @@
 // ====== Store Class: Handles all Operations on Local Storage ======
-export class Store {
+export default class Store {
   static setBook(books) {
     localStorage.setItem('books', JSON.stringify(books));
   }
@@ -18,9 +18,8 @@ export class Store {
   }
 
   static removeBook(ID) {
-    let books = Store.getBooks()
-    books = books.filter(book => book.id !== ID)
-    this.setBook(books)
+    let books = Store.getBooks();
+    books = books.filter((book) => book.id !== ID);
+    this.setBook(books);
   }
 }
-

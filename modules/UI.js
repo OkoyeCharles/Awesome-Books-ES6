@@ -1,9 +1,8 @@
-const form = document.getElementById('form');
 const booksContainer = document.querySelector('.added-books-container');
 
-export class UI {
+export default class UI {
   // Get Books from Local Storage and Updates the UI
-  static updateBooks(booksContainer) { 
+  static updateBooks(booksContainer) {
     const books = JSON.parse(localStorage.getItem('books'));
     booksContainer.innerHTML = '';
     if (books) books.forEach((book) => this.addBook(book));
@@ -13,7 +12,7 @@ export class UI {
   static addBook(book) {
     const bookUI = document.createElement('div');
     bookUI.className = 'book';
-    const BookId = (book.title + book.author).replace(/\s/g, "");
+    const BookId = (book.title + book.author).replace(/\s/g, '');
     bookUI.setAttribute('id', (BookId));
     bookUI.innerHTML = `
                 <p class="book-title">"
@@ -25,7 +24,7 @@ export class UI {
                 </button>`;
     booksContainer.append(bookUI);
   }
-  
+
   // Removes the Book
   static removeBook(BookId) {
     document.getElementById(BookId).remove();
@@ -43,10 +42,12 @@ export class UI {
   // Check if book has been added
   static validate(book) {
     const books = JSON.parse(localStorage.getItem('books'));
-    if (!books) return true
-    let count = 0
-    books.forEach((b) => b.title === book.title && b.author === book.author ? count += 1: count);
-    if (count === 0) return true
+    if (!books) return true;
+    let count = 0;
+    books.forEach((b) => {
+      if (b.title === book.title && b.author === book.author) count += 1;
+    });
+    if (count === 0) return true;
     UI.displayError('Book title and author already added');
     return false;
   }
@@ -61,8 +62,8 @@ export const displayPage = () => {
     link.addEventListener('click', () => {
       sections.forEach((section) => section.classList.add('hide'));
       main.children[i].classList.remove('hide');
-      navLinks.forEach((link) => link.className = 'nav-link');
+      navLinks.forEach((link) => { link.className = 'nav-link'; });
       navLinks[i].classList.add('active');
-    })
-  })
+    });
+  });
 };
